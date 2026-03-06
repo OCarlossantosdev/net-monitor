@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+body {
+  @apply bg-slate-950 text-slate-50; /* Já deixando um fundo escuro padrão */
+  margin: 0;
+  font-family: sans-serif;
+}

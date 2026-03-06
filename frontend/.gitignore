@@ -1,0 +1,11 @@
+# Dependências
+node_modules/
+dist/
+.DS_Store
+
+# Segurança e Variáveis de Ambiente
+.env
+.env.local
+
+# Prisma
+/backend/prisma/migrations/

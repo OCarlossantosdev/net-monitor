@@ -1,0 +1,35 @@
+  generator client {
+    provider = "prisma-client-js"
+  }
+
+datasource db {
+  provider  = "postgresql"
+}
+
+  model NetworkLog {
+    id          String   @id @default(uuid())
+    timestamp   DateTime @default(now())
+    host        String
+    latency     Float?
+    status      String
+    packetLoss  Float?
+    type        String
+  }
+
+  model Outage {
+    id            String    @id @default(uuid())
+    startTime     DateTime  @default(now())
+    endTime       DateTime?
+    duration      Int?
+    probableCause String?
+  }
+
+  model Device {
+  id        String   @id @default(uuid())
+  ip        String   @unique
+  hostname  String   @default("Desconhecido")
+  mac       String?  // Deixamos preparado caso queira pegar o MAC Address no futuro
+  status    String   @default("online")
+  lastSeen  DateTime @default(now())
+  createdAt DateTime @default(now())
+}
