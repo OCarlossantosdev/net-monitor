@@ -7,7 +7,7 @@ import {
 import { 
   Activity, Wifi, WifiOff, AlertTriangle, 
   DownloadCloud, UploadCloud, Gauge, Globe, Server, X,
-  CheckCircle2, ShieldAlert, HeartPulse
+  CheckCircle2, ShieldAlert, HeartPulse, Lock, Unlock
 } from 'lucide-react';
 
 interface NetworkLog {
@@ -89,7 +89,7 @@ export function DashboardView({ isTvMode = false }: DashboardProps) {
       const json = await res.json();
       if (json.success) {
         setAuditData(json.data);
-        fetchDashboardData(); // Atualiza o gráfico de fundo pois salvamos um log novo!
+        fetchDashboardData(); 
       }
     } catch (error) { console.error("Falha na auditoria:", error); } 
     finally { setIsAuditing(false); }
@@ -112,7 +112,6 @@ export function DashboardView({ isTvMode = false }: DashboardProps) {
   const borderStatus = isOnline ? 'border-emerald-500/20' : isHighLatency ? 'border-amber-500/20' : 'border-rose-500/20';
   const StatusIcon = isOnline ? Wifi : isHighLatency ? AlertTriangle : WifiOff;
 
-  // Cores dinâmicas para o Modal de Auditoria
   const getAuditColors = (status: string) => {
     if (status === 'Saudável') return { bg: 'bg-emerald-500/10', border: 'border-emerald-500/30', text: 'text-emerald-400', icon: <CheckCircle2 size={32} className="text-emerald-500" /> };
     if (status === 'Instável') return { bg: 'bg-amber-500/10', border: 'border-amber-500/30', text: 'text-amber-400', icon: <AlertTriangle size={32} className="text-amber-500" /> };
@@ -235,11 +234,11 @@ export function DashboardView({ isTvMode = false }: DashboardProps) {
                 <div className="py-32 flex flex-col items-center justify-center">
                   <Activity size={80} className="text-purple-500 animate-pulse mb-8" />
                   <p className="text-purple-400 font-black tracking-[0.3em] uppercase animate-pulse text-sm">Coletando amostras de rede...</p>
-                  <p className="text-gray-600 font-mono text-[10px] mt-4 uppercase">Ping • Traceroute • HTTP • Jitter • Portas</p>
+                  <p className="text-gray-600 font-mono text-[10px] mt-4 uppercase">Ping • Traceroute • HTTP • Jitter • Portas • SSL</p>
                 </div>
               ) : auditData ? (
                 <div className="animate-in fade-in zoom-in duration-500">
-                  {/* CARD DE LAUDO (O Cérebro) */}
+                  {/* CARD DE LAUDO */}
                   <div className={`p-8 rounded-[2rem] border ${getAuditColors(auditData.status).bg} ${getAuditColors(auditData.status).border} mb-8 flex items-start gap-6`}>
                     <div className="bg-[#0d0d12] p-4 rounded-full shadow-lg">{getAuditColors(auditData.status).icon}</div>
                     <div>
@@ -256,6 +255,29 @@ export function DashboardView({ isTvMode = false }: DashboardProps) {
                     <div className="bg-white/5 border border-white/5 p-6 rounded-3xl"><p className="text-[9px] text-gray-500 font-black uppercase mb-1">Resposta Web</p><p className="text-2xl font-black text-white">{auditData.metrics.webResponse}ms</p></div>
                   </div>
 
+                  {/* LINHA DE SEGURANÇA E ROTA */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                    {/* NOVO: CARD DE SAÚDE SSL */}
+                    <div className={`p-6 rounded-3xl border flex items-center justify-between ${auditData.metrics.ssl?.valid ? 'bg-emerald-500/5 border-emerald-500/20' : 'bg-rose-500/10 border-rose-500/30'}`}>
+                      <div>
+                        <p className="text-[8px] text-gray-400 font-black uppercase tracking-widest mb-1">Criptografia SSL (Main Site)</p>
+                        {auditData.metrics.ssl?.valid ? (
+                           <p className="text-emerald-400 font-black">Seguro • Válido por {auditData.metrics.ssl.daysRemaining} dias</p>
+                        ) : (
+                           <p className="text-rose-500 font-black animate-pulse">ALERTA: CERTIFICADO EXPIRADO!</p>
+                        )}
+                        <p className="text-[10px] text-gray-500 mt-1 font-mono">Emissor: {auditData.metrics.ssl?.issuer || 'N/A'}</p>
+                      </div>
+                      {auditData.metrics.ssl?.valid ? <Lock size={32} className="text-emerald-500/50"/> : <Unlock size={32} className="text-rose-500"/>}
+                    </div>
+
+                    {/* CARD DE GARGALO DE ROTA (TRACEROUTE) */}
+                    <div className="p-6 rounded-3xl border bg-purple-500/5 border-purple-500/20 flex flex-col justify-center">
+                      <p className="text-[8px] text-purple-400/50 font-black uppercase tracking-widest mb-1">IA de Rota (Traceroute)</p>
+                      <p className="text-purple-400 font-black text-sm truncate">{auditData.metrics.routeBottleneck}</p>
+                    </div>
+                  </div>
+
                   {/* INFO INFRAESTRUTURA */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="bg-[#050507] p-6 rounded-3xl border border-white/5 flex justify-between items-center">
@@ -267,6 +289,7 @@ export function DashboardView({ isTvMode = false }: DashboardProps) {
                       <Server size={24} className="text-gray-700" />
                     </div>
                   </div>
+
                 </div>
               ) : null}
             </motion.div>

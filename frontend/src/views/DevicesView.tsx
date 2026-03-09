@@ -4,7 +4,7 @@ import {
   Server, RefreshCw, Monitor, Smartphone, ChevronRight, Activity, 
   ShieldCheck, FileText, Zap, ShieldAlert, Globe, Search, 
   AlertTriangle, CheckCircle2, Edit3, Download, FilePieChart, 
-  ChevronDown, FileSpreadsheet, Tv, Cpu, Tablet, Laptop
+  ChevronDown, FileSpreadsheet, Tv, Cpu, Tablet, Laptop, Network
 } from 'lucide-react';
 
 interface Device {
@@ -129,25 +129,12 @@ export function DevicesView() {
   useEffect(() => { fetchDevices(); }, []);
   useEffect(() => { if (selectedDevice) fetchHistory(selectedDevice.ip); }, [selectedDevice]);
 
-  // ==========================================
-  // LÓGICA DE ÍCONES INTELIGENTES (INVENTÁRIO)
-  // ==========================================
   const getDeviceIcon = (hostname: string) => {
     const name = hostname.toLowerCase();
-    
-    // TVs e Displays (Ex: Roku, Samsung TV)
     if (name.includes('tv') || name.includes('roku') || name.includes('samsung') || name.includes('lg electronics')) return <Tv size={24} />;
-    
-    // Smartphones (Ex: Apple iPhone, Motorola, Xiaomi)
     if (name.includes('phone') || name.includes('apple') || name.includes('motorola') || name.includes('xiaomi') || name.includes('huawei')) return <Smartphone size={24} />;
-    
-    // Tablets
     if (name.includes('tablet') || name.includes('ipad')) return <Tablet size={24} />;
-    
-    // Laptops e Workstations (Ex: Dell, Lenovo, HP, Asus)
     if (name.includes('desktop') || name.includes('dell') || name.includes('lenovo') || name.includes('intel') || name.includes('hp') || name.includes('asus')) return <Laptop size={24} />;
-    
-    // Infraestrutura e Desconhecidos (Ex: Roteadores, Switches)
     return <Server size={24} />;
   };
 
@@ -195,7 +182,6 @@ export function DevicesView() {
         {filteredDevices.map((device) => {
           const isMe = device.ip.trim() === myIp.trim();
           const isOnline = device.status === 'online';
-          // Destaque visual se o sistema conseguiu identificar o hardware autonomamente
           const isAutoIdentified = device.hostname.includes('(Auto)');
           
           return (
@@ -234,20 +220,12 @@ export function DevicesView() {
                 {device.ip}
               </p>
               
-              {/* Mostra o MAC em tamanho reduzido para visualização de infraestrutura */}
               <p className="text-gray-700/50 font-mono text-[8px] mt-1 font-bold uppercase tracking-widest ml-3.5">
                 {device.mac}
               </p>
             </motion.div>
           );
         })}
-        
-        {filteredDevices.length === 0 && (
-          <div className="col-span-full py-32 text-center border border-dashed border-white/5 rounded-[3rem] bg-white/[0.01]">
-            <CheckCircle2 size={48} className="mx-auto text-gray-800 mb-6" />
-            <p className="text-gray-600 text-[10px] font-black uppercase tracking-[0.4em] italic">Nenhum ativo detectado na varredura</p>
-          </div>
-        )}
       </div>
 
       <AnimatePresence>
@@ -259,7 +237,6 @@ export function DevicesView() {
                 <button onClick={closeCommandCenter} className="p-3 bg-white/5 hover:bg-rose-500 hover:text-white rounded-2xl transition-all"><ChevronRight size={24}/></button>
               </div>
 
-              {/* RENOMEAÇÃO EM TEMPO REAL */}
               <div className="bg-white/5 rounded-[2.5rem] p-10 border border-white/5 mb-10 text-center group">
                 <div className="flex flex-col items-center">
                   <p className="text-[10px] text-gray-600 font-black uppercase tracking-[0.3em] mb-4 italic">Identificar Ativo</p>
@@ -309,14 +286,33 @@ export function DevicesView() {
                                  <div key={key} className="bg-purple-600/10 p-5 rounded-[2rem] border border-purple-500/20 text-center"><p className="text-[8px] text-purple-400 font-black uppercase mb-1">{key}</p><p className="text-white font-black text-sm italic">{val}</p></div>
                                ))}
                             </div>
+
+                            {/* NOVO: SERVIÇOS DETECTADOS (BANNER GRABBING) */}
                             <div className="bg-black/40 p-8 rounded-[2rem] border border-purple-500/20 relative">
-                               <p className="text-[9px] text-gray-500 font-black uppercase mb-6 italic tracking-widest">Traceroute (MTR)</p>
-                               <div className="space-y-4">
-                                  {advancedData.traceroute_hops.map((hop: string, i: number) => (
-                                    <div key={i} className="flex items-center gap-4 text-[11px] text-gray-400 font-mono"><span className="w-5 h-5 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-400 font-black text-[8px]">{i+1}</span><span className="font-bold">{hop}</span></div>
+                               <p className="text-[9px] text-gray-500 font-black uppercase mb-4 italic tracking-widest flex items-center gap-2"><Network size={12}/> Portas & Serviços Abertos</p>
+                               <div className="space-y-2">
+                                  {advancedData.active_ports.map((portInfo: string, i: number) => (
+                                    <div key={i} className="flex items-center gap-3 text-[10px] text-purple-300 bg-purple-500/5 p-3 rounded-xl border border-purple-500/10">
+                                      <ShieldCheck size={14} className="text-purple-500" />
+                                      <span className="font-mono font-bold">{portInfo}</span>
+                                    </div>
                                   ))}
                                </div>
                             </div>
+
+                            {/* NOVO: IA DE ROTA */}
+                            <div className="bg-black/40 p-8 rounded-[2rem] border border-purple-500/20 relative">
+                               <p className="text-[9px] text-gray-500 font-black uppercase mb-4 italic tracking-widest flex items-center gap-2"><Activity size={12}/> Análise de Gargalo (Traceroute)</p>
+                               <div className="p-4 bg-purple-500/10 border border-purple-500/30 rounded-xl mb-4">
+                                 <p className="text-xs font-black text-purple-400">{advancedData.route_analysis}</p>
+                               </div>
+                               <div className="space-y-2">
+                                  {advancedData.traceroute_hops.map((hop: string, i: number) => (
+                                    <div key={i} className="flex items-center gap-4 text-[10px] text-gray-500 font-mono"><span className="w-5 h-5 rounded-full bg-white/5 flex items-center justify-center text-gray-400 font-black text-[8px]">{i+1}</span><span className="truncate">{hop}</span></div>
+                                  ))}
+                               </div>
+                            </div>
+
                           </div>
                         ) : <button onClick={() => runTest('advanced')} className="w-full py-6 bg-purple-600 text-white font-black rounded-3xl shadow-xl hover:bg-purple-500 transition-all">INICIAR VARREDURA PROFUNDA</button>}
                       </div>

@@ -96,7 +96,7 @@ fastify.get("/network/speedtest", async (request, reply) => {
   }
 });
 
-// NOVA ROTA: AUDITORIA GLOBAL COM IA (LAUDO MÉDICO DA REDE)
+// AUDITORIA GLOBAL COM IA V2 (COM SSL E ANÁLISE DE ROTA)
 fastify.get("/network/global-diagnostics", async (request, reply) => {
   try {
     const { localIp, gatewayIp } = getNetworkContext();
@@ -104,12 +104,11 @@ fastify.get("/network/global-diagnostics", async (request, reply) => {
     // Executa a Auditoria Completa usando o novo método inteligente
     const results = await NetworkService.runFullNetworkAudit(gatewayIp, localIp);
 
-    // REGRA APLICADA: Salva todo teste completo no histórico como mandatório
+    // Salva o teste no banco
     await prisma.networkLog.create({
       data: {
         host: "AUDITORIA-GLOBAL",
         latency: results.metrics.extLatency,
-        // Converte o status do laudo (Saudável, Instável, etc) para o padrão do banco
         status: results.status === 'Saudável' ? 'online' : (results.status === 'Offline' ? 'offline' : 'high_latency'),
         type: 'global_diagnostic',
         packetLoss: results.metrics.packetLoss,
@@ -281,7 +280,8 @@ fastify.get("/devices/:ip/test/basic", async (request, reply) => {
       NetworkService.checkStatus("8.8.8.8"),
     ]);
 
-    const webTest = await NetworkService.measureHttp("https://google.com");
+    // O basic agora valida a saúde do seu site, não só a latência!
+    const webTest = await NetworkService.inspectWebHealth("https://google.com", "google.com");
     const isNetworkUp = pGoogle.alive || pCloudflare.alive;
 
     await prisma.networkLog.create({
@@ -313,14 +313,17 @@ fastify.get("/devices/:ip/test/basic", async (request, reply) => {
   }
 });
 
+// TESTE AVANÇADO COM SMART PORT SCANNER E TRACEROUTE IA
 fastify.get("/devices/:ip/test/advanced", async (request, reply) => {
   const { ip } = request.params as { ip: string };
   try {
     const pingPromises = Array.from({ length: 10 }).map(() => NetworkService.checkStatus(ip));
     
-    const [samples, openPorts] = await Promise.all([
+    // Dispara Scanner Inteligente e Traceroute Analítico juntos
+    const [samples, openServices, traceroute] = await Promise.all([
       Promise.all(pingPromises),
-      NetworkService.scanPorts(ip) 
+      NetworkService.smartScanPorts(ip), // Scanner com Banner Grabbing
+      NetworkService.runSmartTraceroute(ip) // Rota Analítica
     ]);
 
     const latencies = samples.filter((s) => s.alive).map((s) => Number(s.latency) || 0);
@@ -348,8 +351,13 @@ fastify.get("/devices/:ip/test/advanced", async (request, reply) => {
           packetLoss: `${packetLoss}%`,
           stability: packetLoss === 0 ? "Estável" : packetLoss <= 20 ? "Risco" : "Crítico",
         },
-        traceroute_hops: [getNetworkContext().gatewayIp, "Switches_Locais", ip],
-        active_ports: openPorts.length > 0 ? openPorts : ["Nenhuma Detectada"],
+        // O Traceroute agora retorna a IA de gargalo
+        traceroute_hops: traceroute.rawOutput ? traceroute.rawOutput.split('\n').filter(line => line.trim().length > 0).slice(0, 5) : ["Falha no MTR"],
+        route_analysis: traceroute.bottleneck,
+        // O Scanner agora retorna nome do Serviço além da porta
+        active_ports: openServices.length > 0 
+          ? openServices.map(s => `Porta ${s.port} - ${s.service}`) 
+          : ["Nenhuma Detectada"],
         oscillation_index: jitter > 30 ? "Alta" : "Baixa",
       },
     };
@@ -408,7 +416,7 @@ const start = async () => {
     const worker = new MonitorWorker(prisma);
     worker.start(10000); 
     await fastify.listen({ port: 3333, host: "0.0.0.0" });
-    console.log("🚀 NetMonitor (IA Local) na Fluxo Digital");
+    console.log("🚀 NetMonitor Enterprise na Fluxo Digital");
   } catch (err) {
     fastify.log.error(err);
     process.exit(1);

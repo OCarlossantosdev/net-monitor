@@ -4,7 +4,10 @@ import * as ping from 'ping';
 import net from 'net';
 import http from 'http';
 import https from 'https';
-import speedTest from 'speedtest-net';
+import tls from 'tls';
+
+// Ignora a interceptação de SSL do proxy da agência
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 const execPromise = promisify(exec);
 
@@ -19,113 +22,208 @@ export class NetworkService {
     };
   }
 
-  static async runTraceroute(target: string) {
+  /**
+   * TRACEROUTE INTELIGENTE: Analisa o gargalo da rede
+   */
+  static async runSmartTraceroute(target: string) {
     try {
       const isWin = process.platform === 'win32';
-      const command = isWin ? `tracert -d -h 10 ${target}` : `traceroute -n -m 10 ${target}`;
+      const command = isWin ? `tracert -d -h 15 ${target}` : `traceroute -n -m 15 ${target}`;
       const { stdout } = await execPromise(command);
-      return stdout;
-    } catch (error) { return `Erro ao executar traceroute: ${error}`; }
+
+      // Módulo Analítico: Tenta achar onde a conexão "morreu" ou demorou mais de 100ms
+      const lines = stdout.split('\n');
+      let bottleneck = "Nenhum gargalo detectado";
+      let failedHop = null;
+
+      for (const line of lines) {
+        if (line.includes('* * *') || line.includes('Request timed out')) {
+          failedHop = line.trim();
+          bottleneck = `Queda de pacote severa na rota externa.`;
+          break;
+        }
+        // Extrai milissegundos usando Regex básica para achar lentidão na rota
+        const msMatch = line.match(/(\d+)\s*ms/);
+        if (msMatch && parseInt(msMatch[1]) > 150) {
+          bottleneck = `Lentidão extrema (>150ms) no salto: ${line.trim().replace(/\s+/g, ' ')}`;
+          break;
+        }
+      }
+
+      return { rawOutput: stdout, bottleneck };
+    } catch (error) { return { rawOutput: `Erro: ${error}`, bottleneck: "Falha ao mapear rota" }; }
   }
 
-  static async scanPorts(ip: string, ports: number[] = [22, 80, 443, 3306, 3389, 8080]): Promise<number[]> {
-    const openPorts: number[] = [];
+  /**
+   * SMART PORT SCANNER: Tenta identificar qual serviço está rodando na porta (Banner Grabbing)
+   */
+  static async smartScanPorts(ip: string, ports: number[] = [22, 80, 443, 3306, 3389, 5432, 8080]): Promise<{ port: number, service: string }[]> {
+    const activeServices: { port: number, service: string }[] = [];
+
     const checkPort = (port: number) => {
       return new Promise<void>((resolve) => {
         const socket = new net.Socket();
-        socket.setTimeout(1000); 
-        socket.on('connect', () => { openPorts.push(port); socket.destroy(); resolve(); });
+        socket.setTimeout(1500);
+
+        socket.on('connect', () => {
+          // Se for porta HTTP/HTTPS, nós sabemos o serviço. Se for SSH ou Banco, tentamos ler o banner.
+          let serviceName = "Serviço Desconhecido";
+          if (port === 80) serviceName = "HTTP Web Server";
+          if (port === 443) serviceName = "HTTPS Secure Web";
+          if (port === 3389) serviceName = "Remote Desktop (RDP)";
+
+          socket.write("HEAD / HTTP/1.0\r\n\r\n"); // Envia um "oi" para ver se o serviço responde algo
+
+          socket.on('data', (data) => {
+            const banner = data.toString().trim();
+            if (banner.includes('SSH')) serviceName = `SSH Server (${banner.split('-')[1] || 'Linux'})`;
+            if (banner.includes('mysql') || banner.includes('MariaDB')) serviceName = "MySQL/MariaDB Database";
+            if (banner.includes('PostgreSQL')) serviceName = "PostgreSQL Database";
+            if (banner.includes('Server:')) {
+              const match = banner.match(/Server:\s*(.*)/);
+              if (match) serviceName = `Web Server (${match[1].trim()})`;
+            }
+          });
+
+          // Aguarda um pouquinho para a resposta do banner chegar antes de fechar
+          setTimeout(() => {
+            activeServices.push({ port, service: serviceName });
+            socket.destroy();
+            resolve();
+          }, 300);
+        });
+
         socket.on('timeout', () => { socket.destroy(); resolve(); });
         socket.on('error', () => { socket.destroy(); resolve(); });
         socket.connect(port, ip);
       });
     };
+
     await Promise.all(ports.map(port => checkPort(port)));
-    return openPorts.sort((a, b) => a - b);
+    return activeServices.sort((a, b) => a.port - b.port);
   }
 
-  static async measureHttp(url: string): Promise<{ status: number | string, ms: number }> {
+  /**
+   * INSPEÇÃO WEB AVANÇADA: Mede TTFB e valida a saúde do Certificado SSL
+   */
+  static async inspectWebHealth(url: string, host: string): Promise<{ status: string, ms: number, sslValid: boolean, sslDays: number, sslIssuer: string }> {
     const start = Date.now();
     const client = url.startsWith('https') ? https : http;
+
+    let sslValid = false;
+    let sslDays = 0;
+    let sslIssuer = "N/A";
+
+    // Puxa os dados do Certificado SSL separadamente
+    if (url.startsWith('https')) {
+      try {
+        await new Promise<void>((resolve) => {
+          const socket = tls.connect(443, host, { servername: host }, () => {
+            const cert = socket.getPeerCertificate();
+            socket.end();
+            if (cert && Object.keys(cert).length) {
+              const validTo = new Date(cert.valid_to).getTime();
+              sslDays = Math.round((validTo - Date.now()) / (1000 * 60 * 60 * 24));
+              sslValid = sslDays > 0;
+              const issuerO = Array.isArray(cert.issuer.O) ? cert.issuer.O[0] : cert.issuer.O;
+              const issuerCN = Array.isArray(cert.issuer.CN) ? cert.issuer.CN[0] : cert.issuer.CN;
+              sslIssuer = issuerO || issuerCN || 'Desconhecido';
+            }
+            resolve();
+          });
+          socket.on('error', () => resolve());
+          socket.setTimeout(2000, () => { socket.destroy(); resolve(); });
+        });
+      } catch (e) { }
+    }
+
+    // Faz o teste de resposta HTTP (TTFB)
     return new Promise((resolve) => {
       const req = client.get(url, { timeout: 2000 }, (res) => {
-        resolve({ status: res.statusCode || 'OK', ms: Date.now() - start });
+        resolve({
+          status: `${res.statusCode} ${res.statusMessage || ''}`,
+          ms: Date.now() - start,
+          sslValid, sslDays, sslIssuer
+        });
       });
-      req.on('timeout', () => { req.destroy(); resolve({ status: 'Timeout', ms: 2000 }); });
-      req.on('error', () => { resolve({ status: 'Erro', ms: 0 }); });
+      req.on('timeout', () => { req.destroy(); resolve({ status: 'Timeout', ms: 2000, sslValid, sslDays, sslIssuer }); });
+      req.on('error', () => { resolve({ status: 'Erro', ms: 0, sslValid, sslDays, sslIssuer }); });
     });
   }
 
-  /**
-   * SPEEDTEST OFICIAL (COM FALLBACK PARA CLOUDFLARE)
-   */
   static async runSpeedTest() {
     try {
-      console.log('📡 Iniciando Speedtest Oficial (Ookla)...');
-      const result = await speedTest({ acceptLicense: true, acceptGdpr: true });
-      
-      return {
-        download: (result.download.bandwidth / 125000).toFixed(2),
-        upload: (result.upload.bandwidth / 125000).toFixed(2),
-        ping: Math.round(result.ping.latency),
-        isp: result.isp
-      };
-    } catch (error: any) {
-      console.error('⚠️ Ookla bloqueado pelo sistema. Acionando Fallback nativo...');
-      
-      try {
-        const fallbackDownload = await this.runFallbackDownload();
-        return {
-          download: fallbackDownload,
-          upload: "N/A", // Fallback mede apenas download para ser rápido e não bloquear o Node
-          ping: 0,
-          isp: "Cloudflare Net (Fallback)"
-        };
-      } catch (fallbackError) {
-        throw new Error('Falha total ao medir a velocidade.');
-      }
-    }
+      const pingTest = await this.checkStatus('speed.cloudflare.com');
+      const latency = pingTest.latency ? Math.round(pingTest.latency) : 0;
+
+      const [downloadSpeed, uploadSpeed] = await Promise.all([
+        this.runNativeDownload(),
+        this.runNativeUpload()
+      ]);
+
+      return { download: downloadSpeed, upload: uploadSpeed, ping: latency, isp: "Cloudflare Edge (Agência)" };
+    } catch (error: any) { throw new Error('Falha total ao medir a velocidade.'); }
   }
 
-  /**
-   * NOVA: Consulta de Fabricante via MAC Address (Módulo de Inventário Base)
-   */
+  private static async runNativeDownload(): Promise<string> {
+    try {
+      const start = Date.now();
+      const response = await fetch('https://speed.cloudflare.com/__down?bytes=25000000', { cache: 'no-store' });
+      if (!response.ok) return '0.00';
+      const buffer = await response.arrayBuffer();
+      const durationSeconds = (Date.now() - start) / 1000;
+      if (durationSeconds <= 0) return '0.00';
+      return (((buffer.byteLength * 8) / 1000000) / durationSeconds).toFixed(2);
+    } catch (error) { return '0.00'; }
+  }
+
+  private static async runNativeUpload(): Promise<string> {
+    try {
+      const payloadSize = 10 * 1024 * 1024;
+      const payload = new Uint8Array(payloadSize);
+      const start = Date.now();
+      const response = await fetch('https://speed.cloudflare.com/__up', {
+        method: 'POST', body: payload, headers: { 'Content-Type': 'application/octet-stream' }
+      });
+      const durationSeconds = (Date.now() - start) / 1000;
+      if (durationSeconds <= 0 || !response.ok) return '0.00';
+      return (((payloadSize * 8) / 1000000) / durationSeconds).toFixed(2);
+    } catch (error) { return '0.00'; }
+  }
+
   static async getMacVendor(mac: string): Promise<string> {
     if (!mac || mac === '00:00:00:00:00:00' || mac.length < 17) return 'Desconhecido';
-    
     try {
       const response = await fetch(`https://api.macvendors.com/${encodeURIComponent(mac)}`);
-      
       if (response.ok) {
         const vendor = await response.text();
-        return vendor.replace(/,?\s*(Inc\.|LLC|Corp\.|Corporation|Ltd\.|Co\.)/gi, '').trim(); 
+        return vendor.replace(/,?\s*(Inc\.|LLC|Corp\.|Corporation|Ltd\.|Co\.)/gi, '').trim();
       }
       return 'Desconhecido';
-    } catch (error) {
-      return 'Desconhecido';
-    }
+    } catch (error) { return 'Desconhecido'; }
   }
 
   /**
-   * O NOVO CÉREBRO: Auditoria Completa e Diagnóstico Inteligente
+   * AUDITORIA GLOBAL V2 (Agora com SSL e Análise de Rota Inteligente)
    */
   static async runFullNetworkAudit(gatewayIp: string, localIp: string) {
     try {
       const pingPromises = Array.from({ length: 10 }).map(() => this.checkStatus('8.8.8.8'));
-      
-      const [samples, pGateway, pCloudflare, webTest, ipInfoRes] = await Promise.all([
-        Promise.all(pingPromises), 
-        this.checkStatus(gatewayIp), 
-        this.checkStatus('1.1.1.1'), 
-        this.measureHttp('https://google.com'), 
-        fetch('http://ip-api.com/json/').catch(() => null) 
+
+      const [samples, pGateway, pCloudflare, webAudit, ipInfoRes, traceroute] = await Promise.all([
+        Promise.all(pingPromises),
+        this.checkStatus(gatewayIp),
+        this.checkStatus('1.1.1.1'),
+        this.inspectWebHealth('https://google.com', 'google.com'),
+        fetch('http://ip-api.com/json/').catch(() => null),
+        this.runSmartTraceroute('8.8.8.8') // Traça a rota até o Google para achar gargalos
       ]);
 
       const ipInfo = ipInfoRes && ipInfoRes.ok ? await ipInfoRes.json() : {};
 
       const latencies = samples.filter(s => s.alive).map(s => Number(s.latency) || 0);
       const aliveCount = samples.filter(s => s.alive).length;
-      
+
       const packetLoss = ((10 - aliveCount) / 10) * 100;
       const jitter = latencies.length > 1 ? Math.round(Math.max(...latencies) - Math.min(...latencies)) : 0;
       const extLatency = latencies.length > 0 ? Math.round(latencies.reduce((a, b) => a + b, 0) / latencies.length) : 0;
@@ -136,19 +234,19 @@ export class NetworkService {
 
       if (packetLoss === 100) {
         status = 'Offline';
-        diagnosis = 'Sem acesso externo. O provedor parou de responder ou o roteador principal perdeu o link óptico (Sinal cortado).';
+        diagnosis = 'Sem acesso externo. O roteador perdeu o link óptico.';
       } else if (packetLoss >= 20) {
         status = 'Crítica';
-        diagnosis = `Perda severa de ${packetLoss}% dos pacotes. Indício de cabo de rede danificado, interferência pesada no Wi-Fi ou saturação extrema na infraestrutura da operadora.`;
+        diagnosis = `Perda de ${packetLoss}% dos pacotes. Indício de cabo danificado ou saturação extrema. Analisador de Rota diz: ${traceroute.bottleneck}`;
       } else if (!pGateway.alive || gatewayLatency > 80) {
         status = 'Crítica';
-        diagnosis = `Gargalo na Rede Local! O tempo de resposta até o seu roteador (${gatewayLatency}ms) está anormal. O equipamento pode estar travando ou o Wi-Fi está muito congestionado.`;
+        diagnosis = `Gargalo Local! Resposta do roteador (${gatewayLatency}ms) está anormal.`;
       } else if (extLatency > 150 || jitter > 50) {
         status = 'Instável';
-        diagnosis = `Conexão oscilando muito (Jitter: ${jitter}ms). Risco alto de travamentos em reuniões de vídeo e VoIP. O problema provável é na rota da operadora ${ipInfo.isp || ''}.`;
-      } else if (webTest.ms > 1500) {
+        diagnosis = `Oscilação de rede (Jitter: ${jitter}ms). Gargalo detectado em: ${traceroute.bottleneck}`;
+      } else if (webAudit.ms > 1500) {
         status = 'Instável';
-        diagnosis = `Ping normal, mas a navegação está lenta (Resposta Web: ${webTest.ms}ms). Sinal claro de problema nos servidores DNS da operadora ou bloqueio de Firewall.`;
+        diagnosis = `Navegação lenta (${webAudit.ms}ms). Possível bloqueio de Firewall ou falha de DNS.`;
       }
 
       return {
@@ -160,11 +258,16 @@ export class NetworkService {
           extLatency,
           gatewayLatency,
           cloudflareLatency: Number(pCloudflare.latency) || 0,
-          webResponse: webTest.ms,
+          webResponse: webAudit.ms,
+          routeBottleneck: traceroute.bottleneck, // Novo dado de IA de Rota
+          ssl: {
+            valid: webAudit.sslValid,
+            daysRemaining: webAudit.sslDays,
+            issuer: webAudit.sslIssuer
+          }
         },
         network: {
-          localIp,
-          gatewayIp,
+          localIp, gatewayIp,
           publicIp: ipInfo.query || 'Não detectado',
           isp: ipInfo.isp || 'Desconhecido',
           location: ipInfo.city || 'Desconhecido'
@@ -176,33 +279,5 @@ export class NetworkService {
       console.error('Falha na Auditoria Global:', error);
       throw new Error('Falha ao executar auditoria completa.');
     }
-  }
-
-  /**
-   * FUNÇÃO PRIVADA: PLANO B DO SPEEDTEST (Download HTTPS nativo)
-   */
-  private static runFallbackDownload(): Promise<string> {
-    return new Promise((resolve) => {
-      const start = Date.now();
-      
-      // Baixa um payload de teste puro de 15MB da Cloudflare (não bloqueável por AV)
-      const req = https.get('https://speed.cloudflare.com/__down?bytes=15000000', (res) => {
-        let downloadedBytes = 0;
-        
-        res.on('data', (chunk) => {
-          downloadedBytes += chunk.length;
-        });
-        
-        res.on('end', () => {
-          const durationSeconds = (Date.now() - start) / 1000;
-          const megabits = (downloadedBytes * 8) / 1000000;
-          const mbps = (megabits / durationSeconds).toFixed(2);
-          resolve(mbps);
-        });
-      });
-
-      req.on('timeout', () => { req.destroy(); resolve('0.00'); });
-      req.on('error', () => { resolve('0.00'); });
-    });
   }
 }
