@@ -15,28 +15,34 @@ export class MonitorWorker {
     this.prisma = prismaInstance;
   }
 
-  public start(intervalMs: number = 60000) {
+  // Mudei o padrão para 10000ms (10 segundos) para bater com o "Live Feed" do Dashboard
+  public start(intervalMs: number = 10000) {
     if (this.isRunning) return;
     this.isRunning = true;
-    console.log(`📡 Monitor de Conexão Ativo (Threshold: ${this.FAILURE_THRESHOLD} falhas)`);
+    console.log(`📡 Monitor de Conexão Ativo (Threshold: ${this.FAILURE_THRESHOLD} falhas | Intervalo: ${intervalMs}ms)`);
 
     this.runCheck();
     this.intervalId = setInterval(() => this.runCheck(), intervalMs);
   }
 
   private async runCheck() {
-    const target = '1.1.1.1'; 
+    // Alvo global e estável para definir a saúde geral da agência
+    const target = '8.8.8.8';
 
     try {
       const result = await NetworkService.checkStatus(target);
+      
+      // TRAVA DE SEGURANÇA: Se a latência for undefined/null (queda), registra como 0. 
+      // Isso evita que o Prisma dê crash e pare de salvar os logs.
+      const safeLatency = result.latency ? Math.round(result.latency) : 0;
 
       // 1. Salva o Log de Latência normalmente
       await this.prisma.networkLog.create({
         data: {
-          host: result.host,
-          latency: result.latency,
-          status: result.alive ? (result.latency && result.latency > 150 ? 'high_latency' : 'online') : 'offline',
-          type: 'auto',
+          host: result.host || target,
+          latency: safeLatency,
+          status: result.alive ? (safeLatency > 150 ? 'high_latency' : 'online') : 'offline',
+          type: 'auto_worker', // Identificador específico para diferenciar dos testes manuais
           packetLoss: result.alive ? 0 : 100
         }
       });
@@ -51,7 +57,7 @@ export class MonitorWorker {
           const outage = await this.prisma.outage.create({
             data: {
               startTime: new Date(),
-              probableCause: 'Perda total de resposta do alvo (Timeout)'
+              probableCause: 'Perda total de resposta do alvo (Timeout DNS)'
             }
           });
           this.activeOutageId = outage.id;
@@ -60,7 +66,8 @@ export class MonitorWorker {
       } else {
         // Se a internet voltou e tinha uma queda aberta, encerra ela
         if (this.activeOutageId) {
-          const startTime = (await this.prisma.outage.findUnique({ where: { id: this.activeOutageId } }))?.startTime;
+          const outageData = await this.prisma.outage.findUnique({ where: { id: this.activeOutageId } });
+          const startTime = outageData?.startTime;
           
           if (startTime) {
             const endTime = new Date();
@@ -80,7 +87,7 @@ export class MonitorWorker {
         this.consecutiveFailures = 0; // Reseta o contador de falhas
       }
     } catch (error) {
-      console.error(`[ERRO-MONITOR]`, error);
+      console.error(`[ERRO-MONITOR-WORKER] Falha grave no loop de verificação:`, error);
     }
   }
 }
