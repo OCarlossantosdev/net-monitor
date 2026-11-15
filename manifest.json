@@ -41,7 +41,8 @@
    "story": "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d2-2026-11-15/v2/story.jpg",
    "caption_len": 412,
    "hook_len": 110,
-   "identity": "v2"
+   "identity": "blocked",
+   "blocked_reason": "Reel de texto estatico sem animacao nem som: estilo reprovado pelo Carlos em 15/11. Substituir por reel do pipeline de animacao (ver claude/aprendizados-edicao-video-fluxo.md) antes de publicar."
   },
   {
    "day": "d3-2026-11-16",
@@ -97,7 +98,8 @@
    "story": "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d5-2026-11-18/v2/story.jpg",
    "caption_len": 328,
    "hook_len": 104,
-   "identity": "v2"
+   "identity": "blocked",
+   "blocked_reason": "Reel de texto estatico sem animacao nem som: estilo reprovado pelo Carlos em 15/11. Substituir por reel do pipeline de animacao (ver claude/aprendizados-edicao-video-fluxo.md) antes de publicar."
   },
   {
    "day": "d6-2026-11-19",
