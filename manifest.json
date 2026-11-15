@@ -31,18 +31,19 @@
    "date": "2026-11-15",
    "format": "reel",
    "media": [
-    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d2-2026-11-15/v2/reel.mp4"
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d2-2026-11-15/v3/reel.mp4"
    ],
-   "cover": "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d2-2026-11-15/v2/cover.jpg",
+   "cover": "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d2-2026-11-15/v3/cover.jpg",
    "duration": 17.4,
-   "caption": "Indicação ajuda, mas não dá pra chamar de estratégia de vendas. Corretor precisa de um canal que ele controla.\n\nIndicação depende de quem lembrou de você e de quando lembrou. Um canal próprio (conteúdo, anúncio e atendimento organizado) você liga quando precisa vender mais.\n\nManda este vídeo para um corretor que vive só de indicação.\n\n#corretordeimoveis #corretordeplanodesaude #marketingparacorretores #vendas",
+   "caption": "O cliente que devia ser seu não sumiu. Ele só não te encontrou.\n\nCorretor de saúde ou de imóveis: se o seu mês depende de alguém lembrar de você, este vídeo é sobre você.\n\nEnquanto o Léo esperava indicação, a Marina pesquisou \"plano de saúde família BH\" e chamou quem apareceu.\n\nO caminho tem 4 passos: Panorama, Oferta, Direcionar e Evoluir.\n\nQuer parar de depender de indicação? Chama a Fluxo no WhatsApp pelo link da bio. A primeira conversa já é um diagnóstico do seu cenário.\n\n#corretordeplanosdesaude #corretordeimoveis #marketingparacorretores #captacaodeclientes",
    "story_title": "Indicação não é estratégia",
    "story_line": "Veja o vídeo no feed.",
-   "story": "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d2-2026-11-15/v2/story.jpg",
-   "caption_len": 412,
-   "hook_len": 110,
-   "identity": "blocked",
-   "blocked_reason": "Reel de texto estatico sem animacao nem som: estilo reprovado pelo Carlos em 15/11. Substituir por reel do pipeline de animacao (ver claude/aprendizados-edicao-video-fluxo.md) antes de publicar."
+   "story": "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d2-2026-11-15/v3/story.mp4",
+   "caption_len": 570,
+   "hook_len": 63,
+   "identity": "v2",
+   "story_type": "video",
+   "theme": "O cliente não sumiu (reel 83 s, universo Léo)"
   },
   {
    "day": "d3-2026-11-16",
