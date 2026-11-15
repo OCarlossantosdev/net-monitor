@@ -89,18 +89,21 @@
    "date": "2026-11-18",
    "format": "reel",
    "media": [
-    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d5-2026-11-18/v2/reel.mp4"
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d5-2026-11-18/v3/reel.mp4"
    ],
-   "cover": "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d5-2026-11-18/v2/cover.jpg",
+   "cover": "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d5-2026-11-18/v3/cover.jpg",
    "duration": 19.8,
-   "caption": "Sua bio de corretor diz o que você faz, para quem e qual o próximo passo? Veja um modelo antes e depois.\n\nOs exemplos do vídeo são modelos ilustrativos. Troque os campos entre colchetes pelos seus.\n\nSalva para reescrever sua bio hoje.\n\n#corretordeimoveis #corretordeplanodesaude #marketingparacorretores #instagramparacorretores",
+   "caption": "Você tem 3 segundos para a pessoa decidir se fica no seu perfil.\n\nBio de corretor precisa responder três coisas: pra quem você ajuda, onde atende e qual é o próximo passo.\n\nSalva e reescreve a sua hoje. Se quiser que a gente olhe o seu perfil inteiro, chama a Fluxo no WhatsApp pelo link da bio.\n\n#corretordeimoveis #corretordeplanosdesaude #bioinstagram #marketingparacorretores",
    "story_title": "Sua bio vende?",
    "story_line": "Modelo antes e depois no feed.",
-   "story": "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d5-2026-11-18/v2/story.jpg",
-   "caption_len": 328,
-   "hook_len": 104,
-   "identity": "blocked",
-   "blocked_reason": "Reel de texto estatico sem animacao nem som: estilo reprovado pelo Carlos em 15/11. Substituir por reel do pipeline de animacao (ver claude/aprendizados-edicao-video-fluxo.md) antes de publicar."
+   "story": "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d5-2026-11-18/v3/story.mp4",
+   "caption_len": 379,
+   "hook_len": 64,
+   "identity": "v2",
+   "story_type": "video",
+   "reel_format": "C celular-heroi 3D",
+   "theme": "3 segundos (bio de corretor)",
+   "approval": "pendente Carlos"
   },
   {
    "day": "d6-2026-11-19",
