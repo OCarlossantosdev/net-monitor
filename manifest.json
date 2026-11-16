@@ -136,19 +136,19 @@
    "date": "2026-11-19",
    "format": "carousel",
    "media": [
-    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d6-2026-11-19/v3/slide-1.jpg",
-    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d6-2026-11-19/v3/slide-2.jpg",
-    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d6-2026-11-19/v3/slide-3.jpg",
-    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d6-2026-11-19/v3/slide-4.jpg",
-    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d6-2026-11-19/v3/slide-5.jpg",
-    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d6-2026-11-19/v3/slide-6.jpg"
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d6-2026-11-19/v4/slide-1.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d6-2026-11-19/v4/slide-2.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d6-2026-11-19/v4/slide-3.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d6-2026-11-19/v4/slide-4.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d6-2026-11-19/v4/slide-5.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d6-2026-11-19/v4/slide-6.jpg"
    ],
    "caption": "Mandou a tabela e o cliente sumiu? O 3º erro, quase todo corretor comete.\n\n1. Mandar o preço antes de entender o cliente\n2. Mandar a tabela inteira sem explicar\n3. Esperar o cliente voltar sozinho\n\nNo slide 5 tem o roteiro pronto: o que mandar antes de cotar, junto com a cotação e no dia seguinte.\n\nSalva pra usar no próximo \"quanto custa?\" e manda pra quem vive mandando tabela.\n\nQuer o roteiro completo de atendimento? Chama a Fluxo no WhatsApp: link na bio.\n\n#corretordeplanodesaude #corretordeimoveis #atendimentowhatsapp #marketingparacorretores",
    "story_title": "Mandou a tabela e sumiu?",
    "story_line": "Conta nos comentários do post.",
    "caption_len": 551,
    "hook_len": 73,
-   "identity": "v2 (padrão gancho + subtítulo)",
+   "identity": "B off-white",
    "planned_format": "carousel",
    "publish_at": "2026-11-19T11:20:00-03:00",
    "time_window": "carrossel 11-13h",
@@ -156,25 +156,25 @@
    "approval": "pendente Carlos",
    "stories_at": "2026-11-19T12:30:00-03:00",
    "stories": [
-    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d6-2026-11-19/v3/story-1.jpg",
-    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d6-2026-11-19/v3/story-2.jpg",
-    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d6-2026-11-19/v3/story-3.jpg",
-    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d6-2026-11-19/v3/story-4.jpg"
-   ]
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d6-2026-11-19/v4/story-1.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d6-2026-11-19/v4/story-2.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d6-2026-11-19/v4/story-3.jpg"
+   ],
+   "stories_note": "pergunta A/B/C + post + direct (respostas por DM: Carlos/Eidryan)"
   },
   {
    "day": "d7-2026-11-20",
    "date": "2026-11-20",
    "format": "image",
    "media": [
-    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d7-2026-11-20/v3/post.jpg"
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d7-2026-11-20/v4/post.jpg"
    ],
    "caption": "Sua agência já vendeu um plano? A Fluxo tem um corretor como sócio.\n\nMarketing pra corretor não é post bonito. É anúncio que fala com quem compra plano ou imóvel, perfil que responde em 3 segundos e WhatsApp que transforma clique em conversa.\n\nA gente sabe o que é cliente pedindo só preço, sumindo depois da cotação e mês dependendo de indicação, porque vive isso.\n\nManda pro corretor que já trocou de agência e continuou no mesmo lugar.\n\nChama a Fluxo no WhatsApp: link na bio.\n\n#corretordeplanodesaude #corretordeimoveis #marketingparacorretores #agenciademarketing",
    "story_title": "Marketing para corretores",
    "story_line": "Conte seu gargalo pelo link da bio.",
    "caption_len": 568,
    "hook_len": 67,
-   "identity": "v2 (padrão gancho + subtítulo)",
+   "identity": "B off-white",
    "planned_format": "static",
    "publish_at": "2026-11-20T07:15:00-03:00",
    "time_window": "estático 6-9h",
@@ -182,11 +182,12 @@
    "approval": "pendente Carlos",
    "stories_at": "2026-11-20T08:30:00-03:00",
    "stories": [
-    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d7-2026-11-20/v3/story-1.jpg",
-    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d7-2026-11-20/v3/story-2.jpg",
-    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d7-2026-11-20/v3/story-3.jpg",
-    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d7-2026-11-20/v3/story-4.jpg"
-   ]
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d7-2026-11-20/v4/story-1.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d7-2026-11-20/v4/story-2.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d7-2026-11-20/v4/story-3.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d7-2026-11-20/v4/story-4.jpg"
+   ],
+   "stories_note": "quebra de objeção independente do post"
   }
  ],
  "identity_spec": "Projeto Claude Fluxo Digital: claude/identidade-carrosseis-fluxo.md",
