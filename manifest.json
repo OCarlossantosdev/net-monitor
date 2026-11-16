@@ -65,7 +65,14 @@
    "hook_len": 105,
    "identity": "v2 (capa padrão gancho + subtítulo)",
    "approval": "aprovado Carlos 16/11 13:26",
-   "publish_at": "2026-11-16T18:47:00-03:00"
+   "publish_at": "2026-11-16T18:47:00-03:00",
+   "stories": [
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d3-2026-11-16/v3/story-1.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d3-2026-11-16/v3/story-2.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d3-2026-11-16/v3/story-3.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d3-2026-11-16/v3/story-4.jpg"
+   ],
+   "stories_note": "Sequência aprovada 16/11 13:33: publicar as 4 em ordem logo após o carrossel (substitui o story único)."
   },
   {
    "day": "d4-2026-11-17",
