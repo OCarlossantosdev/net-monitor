@@ -105,68 +105,88 @@
    "date": "2026-11-18",
    "format": "reel",
    "media": [
-    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d5-2026-11-18/v3/reel.mp4"
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d5-2026-11-18/v4/reel.mp4"
    ],
-   "cover": "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d5-2026-11-18/v3/cover.jpg",
+   "cover": "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d5-2026-11-18/v4/cover.jpg",
    "duration": 19.8,
-   "caption": "Você tem 3 segundos para a pessoa decidir se fica no seu perfil.\n\nBio de corretor precisa responder três coisas: pra quem você ajuda, onde atende e qual é o próximo passo.\n\nSalva e reescreve a sua hoje. Se quiser que a gente olhe o seu perfil inteiro, chama a Fluxo no WhatsApp pelo link da bio.\n\n#corretordeimoveis #corretordeplanosdesaude #bioinstagram #marketingparacorretores",
+   "caption": "Corretor: um cliente abriu seu perfil. Você tem 3 segundos.\n\nSe a bio não diz quem você ajuda, onde atende e o que fazer agora, ele volta pra busca e chama outro corretor.\n\nSalva e reescreve a sua hoje. Manda pro corretor que ainda tem \"realizando sonhos\" na bio.\n\nQuer o perfil inteiro revisado por quem conhece o mercado de corretor por dentro? Chama a Fluxo no WhatsApp: link na bio.\n\n#corretordeimoveis #corretordeplanodesaude #bioinstagram #marketingparacorretores",
    "story_title": "Sua bio vende?",
    "story_line": "Modelo antes e depois no feed.",
-   "story": "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d5-2026-11-18/v3/story.mp4",
-   "caption_len": 379,
-   "hook_len": 64,
-   "identity": "v2",
+   "caption_len": 469,
+   "hook_len": 59,
+   "identity": "v2.2 (abertura corrigida)",
    "story_type": "video",
    "reel_format": "C celular-heroi 3D",
    "theme": "3 segundos (bio de corretor)",
-   "approval": "pendente Carlos (v4)",
+   "approval": "pendente Carlos",
    "planned_format": "reel",
    "publish_at": "2026-11-18T18:15:00-03:00",
    "time_window": "reel 17-21h (30-45 min antes do pico)",
    "plan_note": "Reel 3 segundos v4 (abertura corrigida)",
-   "stories_at": "2026-11-18T19:30:00-03:00"
+   "stories_at": "2026-11-18T19:30:00-03:00",
+   "stories": [
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d5-2026-11-18/v4/story-1.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d5-2026-11-18/v4/story-2.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d5-2026-11-18/v4/story-3.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d5-2026-11-18/v4/story-4.jpg"
+   ]
   },
   {
    "day": "d6-2026-11-19",
    "date": "2026-11-19",
-   "format": "image",
+   "format": "carousel",
    "media": [
-    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d6-2026-11-19/v2/slide-1.jpg"
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d6-2026-11-19/v3/slide-1.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d6-2026-11-19/v3/slide-2.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d6-2026-11-19/v3/slide-3.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d6-2026-11-19/v3/slide-4.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d6-2026-11-19/v3/slide-5.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d6-2026-11-19/v3/slide-6.jpg"
    ],
-   "caption": "Todo corretor já mandou a tabela, o cliente visualizou e sumiu. Qual foi a sua última vez?\n\nNa maioria das vezes a conversa acaba na tabela porque ninguém perguntou o que o cliente precisava.\n\nSe você vende plano de saúde, pergunte idade, cidade e quem vai usar. Se vende imóvel, bairro, orçamento e prazo.\n\nConta aqui qual pergunta você faz antes de mandar preço.\n\n#corretordeimoveis #corretordeplanodesaude #marketingparacorretores #vendaspelowhatsapp",
+   "caption": "Mandou a tabela e o cliente sumiu? O 3º erro, quase todo corretor comete.\n\n1. Mandar o preço antes de entender o cliente\n2. Mandar a tabela inteira sem explicar\n3. Esperar o cliente voltar sozinho\n\nNo slide 5 tem o roteiro pronto: o que mandar antes de cotar, junto com a cotação e no dia seguinte.\n\nSalva pra usar no próximo \"quanto custa?\" e manda pra quem vive mandando tabela.\n\nQuer o roteiro completo de atendimento? Chama a Fluxo no WhatsApp: link na bio.\n\n#corretordeplanodesaude #corretordeimoveis #atendimentowhatsapp #marketingparacorretores",
    "story_title": "Mandou a tabela e sumiu?",
    "story_line": "Conta nos comentários do post.",
-   "story": "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d6-2026-11-19/v2/story.jpg",
-   "caption_len": 453,
-   "hook_len": 90,
-   "identity": "v2",
+   "caption_len": 551,
+   "hook_len": 73,
+   "identity": "v2 (padrão gancho + subtítulo)",
    "planned_format": "carousel",
    "publish_at": "2026-11-19T11:20:00-03:00",
    "time_window": "carrossel 11-13h",
    "plan_note": "Carrossel Mandou a tabela e o cliente sumiu (erro + roteiro salvável)",
    "approval": "pendente Carlos",
-   "stories_at": "2026-11-19T12:30:00-03:00"
+   "stories_at": "2026-11-19T12:30:00-03:00",
+   "stories": [
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d6-2026-11-19/v3/story-1.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d6-2026-11-19/v3/story-2.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d6-2026-11-19/v3/story-3.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d6-2026-11-19/v3/story-4.jpg"
+   ]
   },
   {
    "day": "d7-2026-11-20",
    "date": "2026-11-20",
    "format": "image",
    "media": [
-    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d7-2026-11-20/v2/slide-1.jpg"
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d7-2026-11-20/v3/post.jpg"
    ],
-   "caption": "A Fluxo Digital faz marketing para corretores de plano de saúde e de imóveis. Esta semana mostramos por onde começar.\n\nFalamos de follow-up, indicação, método, anúncio e bio. Se algum desses pontos é o seu gargalo, mande mensagem pelo link da bio e conte qual.\n\nToda semana tem conteúdo novo por aqui.\n\n#corretordeimoveis #corretordeplanodesaude #marketingparacorretores #fluxodigital",
+   "caption": "Sua agência já vendeu um plano? A Fluxo tem um corretor como sócio.\n\nMarketing pra corretor não é post bonito. É anúncio que fala com quem compra plano ou imóvel, perfil que responde em 3 segundos e WhatsApp que transforma clique em conversa.\n\nA gente sabe o que é cliente pedindo só preço, sumindo depois da cotação e mês dependendo de indicação, porque vive isso.\n\nManda pro corretor que já trocou de agência e continuou no mesmo lugar.\n\nChama a Fluxo no WhatsApp: link na bio.\n\n#corretordeplanodesaude #corretordeimoveis #marketingparacorretores #agenciademarketing",
    "story_title": "Marketing para corretores",
    "story_line": "Conte seu gargalo pelo link da bio.",
-   "story": "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d7-2026-11-20/v2/story.jpg",
-   "caption_len": 384,
-   "hook_len": 117,
-   "identity": "v2",
+   "caption_len": 568,
+   "hook_len": 67,
+   "identity": "v2 (padrão gancho + subtítulo)",
    "planned_format": "static",
    "publish_at": "2026-11-20T07:15:00-03:00",
    "time_window": "estático 6-9h",
    "plan_note": "Estático de posicionamento (estilo diferente do de terça)",
    "approval": "pendente Carlos",
-   "stories_at": "2026-11-20T08:30:00-03:00"
+   "stories_at": "2026-11-20T08:30:00-03:00",
+   "stories": [
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d7-2026-11-20/v3/story-1.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d7-2026-11-20/v3/story-2.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d7-2026-11-20/v3/story-3.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d7-2026-11-20/v3/story-4.jpg"
+   ]
   }
  ],
  "identity_spec": "Projeto Claude Fluxo Digital: claude/identidade-carrosseis-fluxo.md",
