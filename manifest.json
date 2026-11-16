@@ -91,7 +91,12 @@
    "story": "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d4-2026-11-17/v2/story.jpg",
    "caption_len": 325,
    "hook_len": 106,
-   "identity": "v2"
+   "identity": "v2",
+   "planned_format": "static",
+   "publish_at": "2026-11-17T12:15:00-03:00",
+   "time_window": "almoço",
+   "plan_note": "Estático mito × verdade (era carrossel 3 mitos)",
+   "approval": "pendente Carlos"
   },
   {
    "day": "d5-2026-11-18",
@@ -112,7 +117,11 @@
    "story_type": "video",
    "reel_format": "C celular-heroi 3D",
    "theme": "3 segundos (bio de corretor)",
-   "approval": "pendente Carlos"
+   "approval": "pendente Carlos (v4)",
+   "planned_format": "reel",
+   "publish_at": "2026-11-18T19:35:00-03:00",
+   "time_window": "noite",
+   "plan_note": "Reel 3 segundos v4 (abertura corrigida)"
   },
   {
    "day": "d6-2026-11-19",
@@ -127,7 +136,12 @@
    "story": "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d6-2026-11-19/v2/story.jpg",
    "caption_len": 453,
    "hook_len": 90,
-   "identity": "v2"
+   "identity": "v2",
+   "planned_format": "carousel",
+   "publish_at": "2026-11-19T07:45:00-03:00",
+   "time_window": "manhã",
+   "plan_note": "Carrossel Mandou a tabela e o cliente sumiu (erro + roteiro salvável)",
+   "approval": "pendente Carlos"
   },
   {
    "day": "d7-2026-11-20",
@@ -142,8 +156,22 @@
    "story": "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d7-2026-11-20/v2/story.jpg",
    "caption_len": 384,
    "hook_len": 117,
-   "identity": "v2"
+   "identity": "v2",
+   "planned_format": "static",
+   "publish_at": "2026-11-20T12:15:00-03:00",
+   "time_window": "almoço",
+   "plan_note": "Estático de posicionamento (estilo diferente do de terça)",
+   "approval": "pendente Carlos"
   }
  ],
- "identity_spec": "Projeto Claude Fluxo Digital: claude/identidade-carrosseis-fluxo.md"
+ "identity_spec": "Projeto Claude Fluxo Digital: claude/identidade-carrosseis-fluxo.md",
+ "time_test": {
+  "approved": "Carlos 16/11 13:51",
+  "windows": {
+   "manhã": "~07:45",
+   "almoço": "~12:15",
+   "noite": "~19:35"
+  },
+  "rule": "alternar janelas, sem repetir em dias seguidos; concluir só com 6+ posts por janela"
+ }
 }
