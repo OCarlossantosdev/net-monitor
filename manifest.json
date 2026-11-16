@@ -93,10 +93,11 @@
    "hook_len": 106,
    "identity": "v2",
    "planned_format": "static",
-   "publish_at": "2026-11-17T12:15:00-03:00",
-   "time_window": "almoço",
+   "publish_at": "2026-11-17T07:15:00-03:00",
+   "time_window": "estático 6-9h",
    "plan_note": "Estático mito × verdade (era carrossel 3 mitos)",
-   "approval": "pendente Carlos"
+   "approval": "pendente Carlos",
+   "stories_at": "2026-11-17T08:30:00-03:00"
   },
   {
    "day": "d5-2026-11-18",
@@ -119,9 +120,10 @@
    "theme": "3 segundos (bio de corretor)",
    "approval": "pendente Carlos (v4)",
    "planned_format": "reel",
-   "publish_at": "2026-11-18T19:35:00-03:00",
-   "time_window": "noite",
-   "plan_note": "Reel 3 segundos v4 (abertura corrigida)"
+   "publish_at": "2026-11-18T18:15:00-03:00",
+   "time_window": "reel 17-21h (30-45 min antes do pico)",
+   "plan_note": "Reel 3 segundos v4 (abertura corrigida)",
+   "stories_at": "2026-11-18T19:30:00-03:00"
   },
   {
    "day": "d6-2026-11-19",
@@ -138,10 +140,11 @@
    "hook_len": 90,
    "identity": "v2",
    "planned_format": "carousel",
-   "publish_at": "2026-11-19T07:45:00-03:00",
-   "time_window": "manhã",
+   "publish_at": "2026-11-19T11:20:00-03:00",
+   "time_window": "carrossel 11-13h",
    "plan_note": "Carrossel Mandou a tabela e o cliente sumiu (erro + roteiro salvável)",
-   "approval": "pendente Carlos"
+   "approval": "pendente Carlos",
+   "stories_at": "2026-11-19T12:30:00-03:00"
   },
   {
    "day": "d7-2026-11-20",
@@ -158,20 +161,23 @@
    "hook_len": 117,
    "identity": "v2",
    "planned_format": "static",
-   "publish_at": "2026-11-20T12:15:00-03:00",
-   "time_window": "almoço",
+   "publish_at": "2026-11-20T07:15:00-03:00",
+   "time_window": "estático 6-9h",
    "plan_note": "Estático de posicionamento (estilo diferente do de terça)",
-   "approval": "pendente Carlos"
+   "approval": "pendente Carlos",
+   "stories_at": "2026-11-20T08:30:00-03:00"
   }
  ],
  "identity_spec": "Projeto Claude Fluxo Digital: claude/identidade-carrosseis-fluxo.md",
  "time_test": {
-  "approved": "Carlos 16/11 13:51",
-  "windows": {
-   "manhã": "~07:45",
-   "almoço": "~12:15",
-   "noite": "~19:35"
+  "approved": "Carlos 16/11 14:41 (substitui a grade de 13:51)",
+  "doc": "claude/instagram-horarios-postagem.md",
+  "per_format": {
+   "reel": "18:15",
+   "carousel": "11:20 ou 19:15",
+   "static": "07:15",
+   "stories": "08:30 e 19:30"
   },
-  "rule": "alternar janelas, sem repetir em dias seguidos; concluir só com 6+ posts por janela"
+  "metrics": "salvamentos, envios por DM, retenção; diferença <15% é ruído"
  }
 }
