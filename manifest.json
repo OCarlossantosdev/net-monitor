@@ -77,27 +77,28 @@
   {
    "day": "d4-2026-11-17",
    "date": "2026-11-17",
-   "format": "carousel",
+   "format": "image",
    "media": [
-    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d4-2026-11-17/v2/slide-1.jpg",
-    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d4-2026-11-17/v2/slide-2.jpg",
-    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d4-2026-11-17/v2/slide-3.jpg",
-    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d4-2026-11-17/v2/slide-4.jpg",
-    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d4-2026-11-17/v2/slide-5.jpg"
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d4-2026-11-17/v3/post.jpg"
    ],
-   "caption": "3 mitos sobre anúncio que fazem corretor de saúde e de imóveis gastar dinheiro à toa (o #1 é o mais comum)\n\nQuase todo corretor que testou anúncio sem resultado caiu em pelo menos um deles.\n\nManda este post para quem ainda acredita no mito #1.\n\n#corretordeimoveis #corretordeplanodesaude #marketingparacorretores #trafegopago",
+   "caption": "Anúncio não funciona pra corretor? Leia a verdade antes de desligar sua campanha.\n\nAnúncio traz a conversa. Quem fecha é o atendimento: o tempo que você leva pra responder, as perguntas que você faz e o follow-up.\n\nSe chegou mensagem e ninguém fechou, o problema começou depois do clique.\n\nManda pra aquele corretor que vive dizendo que anúncio não funciona.\n\nQuer descobrir onde o seu atendimento trava? Chama a Fluxo no WhatsApp: link na bio.\n\n#corretordeplanodesaude #corretordeimoveis #trafegopago #marketingparacorretores",
    "story_title": "3 mitos sobre anúncio",
    "story_line": "O #1 é o mais comum. Passe pelo post.",
-   "story": "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d4-2026-11-17/v2/story.jpg",
-   "caption_len": 325,
-   "hook_len": 106,
-   "identity": "v2",
+   "caption_len": 526,
+   "hook_len": 81,
+   "identity": "v2 (padrão gancho + subtítulo)",
    "planned_format": "static",
    "publish_at": "2026-11-17T07:15:00-03:00",
    "time_window": "estático 6-9h",
    "plan_note": "Estático mito × verdade (era carrossel 3 mitos)",
-   "approval": "pendente Carlos",
-   "stories_at": "2026-11-17T08:30:00-03:00"
+   "approval": "aprovado Carlos 16/11 14:49",
+   "stories_at": "2026-11-17T08:30:00-03:00",
+   "stories": [
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d4-2026-11-17/v3/story-1.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d4-2026-11-17/v3/story-2.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d4-2026-11-17/v3/story-3.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d4-2026-11-17/v3/story-4.jpg"
+   ]
   },
   {
    "day": "d5-2026-11-18",
