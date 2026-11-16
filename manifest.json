@@ -50,20 +50,22 @@
    "date": "2026-11-16",
    "format": "carousel",
    "media": [
-    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d3-2026-11-16/v2/slide-1.jpg",
-    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d3-2026-11-16/v2/slide-2.jpg",
-    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d3-2026-11-16/v2/slide-3.jpg",
-    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d3-2026-11-16/v2/slide-4.jpg",
-    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d3-2026-11-16/v2/slide-5.jpg",
-    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d3-2026-11-16/v2/slide-6.jpg"
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d3-2026-11-16/v3/slide-1.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d3-2026-11-16/v3/slide-2.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d3-2026-11-16/v3/slide-3.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d3-2026-11-16/v3/slide-4.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d3-2026-11-16/v3/slide-5.jpg",
+    "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d3-2026-11-16/v3/slide-6.jpg"
    ],
-   "caption": "O P.O.D.E. é o método da Fluxo Digital para corretor organizar a captação de clientes em 4 passos.\n\nServe para quem vende plano de saúde e para quem vende imóvel. Cada letra é uma pergunta que você responde antes de gastar com anúncio.\n\nSalva este post e responda uma letra por dia nesta semana.\n\n#corretordeimoveis #corretordeplanodesaude #marketingparacorretores #metodopode",
-   "story_title": "O método P.O.D.E.",
-   "story_line": "4 passos para organizar sua captação.",
-   "story": "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d3-2026-11-16/v2/story.jpg",
-   "caption_len": 376,
-   "hook_len": 98,
-   "identity": "v2"
+   "caption": "Nunca invista em anúncio antes de ver isso. Pulou a 1ª pergunta? Seu anúncio já nasce queimando dinheiro.\n\nP de Panorama: de onde vêm seus clientes hoje e quanto cada canal custa.\nO de Oferta: o que você vende, para quem e em qual cidade.\nD de Direcionar: um canal e uma mensagem pelos próximos 30 dias.\nE de Evoluir: o que virou venda, e não só curtida.\n\nSalva pra usar antes do próximo anúncio e manda pra um corretor que vive de indicação.\n\nQuer montar com quem conhece o mercado de corretor por dentro? Chama a Fluxo no WhatsApp: link na bio.\n\n#corretordeimoveis #corretordeplanodesaude #marketingparacorretores #metodopode",
+   "story_title": "Vai anunciar? Veja isso antes",
+   "story_line": "Pulou a 1ª pergunta? Passe pelo post.",
+   "story": "https://raw.githubusercontent.com/OCarlossantosdev/net-monitor/ig-assets/d3-2026-11-16/v3/story.jpg",
+   "caption_len": 627,
+   "hook_len": 105,
+   "identity": "v2 (capa padrão gancho + subtítulo)",
+   "approval": "aprovado Carlos 16/11 13:26",
+   "publish_at": "2026-11-16T18:47:00-03:00"
   },
   {
    "day": "d4-2026-11-17",
