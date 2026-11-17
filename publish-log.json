@@ -1,0 +1,11 @@
+{
+  "_info": "Trava anti-duplicidade do operador do Instagram @flxudigital. Chave = <day do manifesto>|post ou <day>|stories. Se a chave existe (qualquer status), NAO publicar de novo. status: em_andamento (trava gravada antes de publicar), ok, falhou.",
+  "entries": {
+    "d1-2026-11-14|post": {"status": "ok", "media_id": "18160001803515690", "permalink": "https://www.instagram.com/p/Dfu2imWjB0p/", "at": "2026-11-14T15:29:42-03:00"},
+    "d2-2026-11-15|post": {"status": "ok", "media_id": "18105874652455214", "permalink": "https://www.instagram.com/reel/Dfxytn-AJXJ/", "at": "2026-11-15T18:54:37-03:00"},
+    "d3-2026-11-16|post": {"status": "ok", "media_id": "18161439364449316", "permalink": "https://www.instagram.com/p/Df0W-4njR_2/", "at": "2026-11-16T18:49:23-03:00"},
+    "d3-2026-11-16|stories": {"status": "ok", "story_ids": ["17991750600073258", "17908279803599153", "18173480944476898", "18205035565382626"], "at": "2026-11-16T18:49:39-03:00"},
+    "d4-2026-11-17|post": {"status": "ok", "media_id": "18113904551234831", "permalink": "https://www.instagram.com/p/Df1zZ6PjeY5/", "at": "2026-11-17T08:17:00-03:00"},
+    "d4-2026-11-17|stories": {"status": "ok", "story_ids": ["18121159549995838", "17975796093161432", "18121591058101198", "18128342917808358"], "at": "2026-11-17T12:20:00-03:00", "nota": "IDs desta execucao das 12h15; execucoes das 8h15/11h15 podem ter publicado antes (Windsor nao mostra stories de hoje)"}
+  }
+}
